@@ -24,6 +24,7 @@ export const useGuitarTuner = () => {
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const animationFrameRef = useRef<number | null>(null);
+  const frequencyBufferRef = useRef<number[]>([]);
 
   const fundamentalHz = useCallback((
     buf: Float32Array,
@@ -62,6 +63,22 @@ export const useGuitarTuner = () => {
     return Math.sqrt(sum / buf.length);
   }, []);
 
+  const updateFrequencyBuffer = useCallback((newFreq: number | null): number | null => {
+    if (newFreq === null) return null;
+    
+    const buffer = frequencyBufferRef.current;
+    buffer.push(newFreq);
+    
+    // Keep only the last 5 readings
+    if (buffer.length > 5) {
+      buffer.shift();
+    }
+    
+    // Calculate moving average
+    const sum = buffer.reduce((acc, freq) => acc + freq, 0);
+    return sum / buffer.length;
+  }, []);
+
   const startTuner = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, error: null }));
@@ -88,9 +105,10 @@ export const useGuitarTuner = () => {
         if (!analyserRef.current) return;
         
         analyserRef.current.getFloatTimeDomainData(buf);
-        const freq = fundamentalHz(buf, ctx.sampleRate);
+        const rawFreq = fundamentalHz(buf, ctx.sampleRate);
+        const smoothedFreq = updateFrequencyBuffer(rawFreq);
         
-        setState(prev => ({ ...prev, frequency: freq, isListening: true }));
+        setState(prev => ({ ...prev, frequency: smoothedFreq, isListening: true }));
         animationFrameRef.current = requestAnimationFrame(update);
       };
       
@@ -102,7 +120,7 @@ export const useGuitarTuner = () => {
         isListening: false 
       }));
     }
-  }, [fundamentalHz]);
+  }, [fundamentalHz, updateFrequencyBuffer]);
 
   const stopTuner = useCallback(() => {
     if (animationFrameRef.current) {
@@ -126,6 +144,7 @@ export const useGuitarTuner = () => {
     }
     
     analyserRef.current = null;
+    frequencyBufferRef.current = [];
     
     setState(prev => ({ 
       ...prev, 
