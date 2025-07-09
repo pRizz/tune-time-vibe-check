@@ -221,6 +221,32 @@ export const GuitarTuner = () => {
 
         <Card className="bg-card/30 backdrop-blur-sm border-border/30">
           <CardHeader>
+            <CardTitle className="text-lg">Tuning References</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">A4</span>
+                <span className="text-muted-foreground">440 Hz (Standard)</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">C4</span>
+                <span className="text-muted-foreground">261.6 Hz (Middle C)</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">C5</span>
+                <span className="text-muted-foreground">523.3 Hz (Tuning Fork)</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">A3</span>
+                <span className="text-muted-foreground">220 Hz (Low A)</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-card/30 backdrop-blur-sm border-border/30">
+          <CardHeader>
             <CardTitle className="text-lg">Standard Guitar Tuning</CardTitle>
           </CardHeader>
           <CardContent>
