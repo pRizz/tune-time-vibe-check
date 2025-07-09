@@ -103,8 +103,11 @@ export const GuitarTuner = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
             Chromatic Tuner
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-1">
             Tune any instrument with precision
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Free & Open Source Software
           </p>
         </div>
 
