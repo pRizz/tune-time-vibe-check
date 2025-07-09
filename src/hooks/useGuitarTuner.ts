@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 interface TunerState {
   frequency: number | null;
   lastValidFrequency: number | null;
+  displayFrequency: number | null;
   isListening: boolean;
   error: string | null;
   volumeLevel: number;
@@ -15,6 +16,7 @@ export const useGuitarTuner = () => {
   const [state, setState] = useState<TunerState>({
     frequency: null,
     lastValidFrequency: null,
+    displayFrequency: null,
     isListening: false,
     error: null,
     volumeLevel: 0,
@@ -158,10 +160,38 @@ export const useGuitarTuner = () => {
       isListening: false, 
       frequency: null, 
       lastValidFrequency: null,
+      displayFrequency: null,
       volumeLevel: 0,
       isTooQuiet: false 
     }));
   }, []);
+
+  useEffect(() => {
+    const targetFreq = state.frequency || state.lastValidFrequency;
+    if (!targetFreq) return;
+
+    // Exponential smoothing for display frequency
+    const smoothingFactor = 0.3; // Lower = smoother, higher = more responsive
+    
+    const interval = setInterval(() => {
+      setState(prev => {
+        if (!targetFreq) return prev;
+        
+        const currentDisplay = prev.displayFrequency || targetFreq;
+        const diff = targetFreq - currentDisplay;
+        
+        // If difference is very small, just snap to target
+        if (Math.abs(diff) < 0.1) {
+          return { ...prev, displayFrequency: targetFreq };
+        }
+        
+        const newDisplay = currentDisplay + (diff * smoothingFactor);
+        return { ...prev, displayFrequency: newDisplay };
+      });
+    }, 50); // Update every 50ms for smooth animation
+
+    return () => clearInterval(interval);
+  }, [state.frequency, state.lastValidFrequency]);
 
   useEffect(() => {
     return () => {
