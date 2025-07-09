@@ -2,7 +2,7 @@ import { useGuitarTuner } from '@/hooks/useGuitarTuner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { Mic, MicOff, Volume2, VolumeX, Github } from 'lucide-react';
 
 const CHROMATIC_NOTES = [
   // Octave 2
@@ -87,6 +87,17 @@ export const GuitarTuner = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 p-4">
+      <div className="absolute top-4 right-4">
+        <a 
+          href="https://github.com/pRizz/tune-time-vibe-check"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card/50 backdrop-blur-sm border border-border/50 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Github className="h-4 w-4" />
+          <span className="text-sm font-medium">Open Source</span>
+        </a>
+      </div>
       <div className="max-w-md mx-auto space-y-6">
         <div className="text-center py-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
