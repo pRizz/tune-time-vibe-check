@@ -154,7 +154,7 @@ export const GuitarTuner = () => {
                   <div className="text-center space-y-4">
                     <div className="space-y-2">
                       <div className="text-6xl font-mono font-bold text-primary">
-                        {currentFreq.toFixed(1)}
+                        {(Math.round(currentFreq * 10) / 10).toFixed(1)}
                         <span className="text-lg text-muted-foreground ml-1">Hz</span>
                         {isTooQuiet && (
                           <div className="text-xs text-muted-foreground mt-1">
