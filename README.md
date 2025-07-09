@@ -53,6 +53,8 @@ A professional-grade chromatic tuner web application that provides real-time pit
 
 **URL**: https://lovable.dev/projects/56f835f2-47d5-454f-97fc-f8b8bfc4c036
 
+**GitHub**: https://github.com/pRizz/tune-time-vibe-check
+
 ## Project Info
 
 ## How can I edit this code?
