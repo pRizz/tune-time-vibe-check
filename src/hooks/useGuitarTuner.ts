@@ -8,7 +8,7 @@ interface TunerState {
   isTooQuiet: boolean;
 }
 
-const VOLUME_THRESHOLD = 0.07;
+const VOLUME_THRESHOLD = 0.04;
 
 export const useGuitarTuner = () => {
   const [state, setState] = useState<TunerState>({
@@ -69,8 +69,8 @@ export const useGuitarTuner = () => {
     const buffer = frequencyBufferRef.current;
     buffer.push(newFreq);
     
-    // Keep only the last 5 readings
-    if (buffer.length > 5) {
+    // Keep only the last 10 readings
+    if (buffer.length > 10) {
       buffer.shift();
     }
     

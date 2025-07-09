@@ -4,20 +4,69 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 
-const GUITAR_NOTES = [
-  { note: 'E', frequency: 82.41, string: '6th (Low E)' },
-  { note: 'A', frequency: 110.00, string: '5th' },
-  { note: 'D', frequency: 146.83, string: '4th' },
-  { note: 'G', frequency: 196.00, string: '3rd' },
-  { note: 'B', frequency: 246.94, string: '2nd' },
-  { note: 'E', frequency: 329.63, string: '1st (High E)' },
+const CHROMATIC_NOTES = [
+  // Octave 2
+  { note: 'C2', frequency: 65.41 },
+  { note: 'C#2', frequency: 69.30 },
+  { note: 'D2', frequency: 73.42 },
+  { note: 'D#2', frequency: 77.78 },
+  { note: 'E2', frequency: 82.41 },
+  { note: 'F2', frequency: 87.31 },
+  { note: 'F#2', frequency: 92.50 },
+  { note: 'G2', frequency: 98.00 },
+  { note: 'G#2', frequency: 103.83 },
+  { note: 'A2', frequency: 110.00 },
+  { note: 'A#2', frequency: 116.54 },
+  { note: 'B2', frequency: 123.47 },
+  
+  // Octave 3
+  { note: 'C3', frequency: 130.81 },
+  { note: 'C#3', frequency: 138.59 },
+  { note: 'D3', frequency: 146.83 },
+  { note: 'D#3', frequency: 155.56 },
+  { note: 'E3', frequency: 164.81 },
+  { note: 'F3', frequency: 174.61 },
+  { note: 'F#3', frequency: 185.00 },
+  { note: 'G3', frequency: 196.00 },
+  { note: 'G#3', frequency: 207.65 },
+  { note: 'A3', frequency: 220.00 },
+  { note: 'A#3', frequency: 233.08 },
+  { note: 'B3', frequency: 246.94 },
+  
+  // Octave 4
+  { note: 'C4', frequency: 261.63 },
+  { note: 'C#4', frequency: 277.18 },
+  { note: 'D4', frequency: 293.66 },
+  { note: 'D#4', frequency: 311.13 },
+  { note: 'E4', frequency: 329.63 },
+  { note: 'F4', frequency: 349.23 },
+  { note: 'F#4', frequency: 369.99 },
+  { note: 'G4', frequency: 392.00 },
+  { note: 'G#4', frequency: 415.30 },
+  { note: 'A4', frequency: 440.00 },
+  { note: 'A#4', frequency: 466.16 },
+  { note: 'B4', frequency: 493.88 },
+  
+  // Octave 5
+  { note: 'C5', frequency: 523.25 },
+  { note: 'C#5', frequency: 554.37 },
+  { note: 'D5', frequency: 587.33 },
+  { note: 'D#5', frequency: 622.25 },
+  { note: 'E5', frequency: 659.25 },
+  { note: 'F5', frequency: 698.46 },
+  { note: 'F#5', frequency: 739.99 },
+  { note: 'G5', frequency: 783.99 },
+  { note: 'G#5', frequency: 830.61 },
+  { note: 'A5', frequency: 880.00 },
+  { note: 'A#5', frequency: 932.33 },
+  { note: 'B5', frequency: 987.77 },
 ];
 
 const getClosestNote = (frequency: number) => {
-  let closest = GUITAR_NOTES[0];
+  let closest = CHROMATIC_NOTES[0];
   let minDiff = Math.abs(frequency - closest.frequency);
   
-  for (const note of GUITAR_NOTES) {
+  for (const note of CHROMATIC_NOTES) {
     const diff = Math.abs(frequency - note.frequency);
     if (diff < minDiff) {
       minDiff = diff;
@@ -40,10 +89,10 @@ export const GuitarTuner = () => {
       <div className="max-w-md mx-auto space-y-6">
         <div className="text-center py-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-            Guitar Tuner
+            Chromatic Tuner
           </h1>
           <p className="text-muted-foreground">
-            Tune your guitar with precision
+            Tune any instrument with precision
           </p>
         </div>
 
@@ -110,19 +159,19 @@ export const GuitarTuner = () => {
                       
                       {closestNote && (
                         <div className="space-y-3">
-                          <div className="flex items-center justify-center gap-2">
-                            <Badge 
-                              variant={isInTune ? "default" : "secondary"}
-                              className={`text-2xl px-4 py-2 ${
-                                isInTune ? 'bg-primary text-primary-foreground' : ''
-                              }`}
-                            >
-                              {closestNote.note}
-                            </Badge>
-                            <span className="text-sm text-muted-foreground">
-                              {closestNote.string}
-                            </span>
-                          </div>
+                           <div className="flex items-center justify-center gap-2">
+                             <Badge 
+                               variant={isInTune ? "default" : "secondary"}
+                               className={`text-2xl px-4 py-2 ${
+                                 isInTune ? 'bg-primary text-primary-foreground' : ''
+                               }`}
+                             >
+                               {closestNote.note}
+                             </Badge>
+                             <span className="text-sm text-muted-foreground">
+                               {closestNote.frequency.toFixed(2)} Hz
+                             </span>
+                           </div>
                           
                           <div className="flex items-center justify-center gap-2">
                             <span className="text-sm text-muted-foreground">
@@ -172,16 +221,26 @@ export const GuitarTuner = () => {
 
         <Card className="bg-card/30 backdrop-blur-sm border-border/30">
           <CardHeader>
-            <CardTitle className="text-lg">Standard Tuning</CardTitle>
+            <CardTitle className="text-lg">Common Reference Notes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-2 text-sm">
-              {GUITAR_NOTES.map((note, index) => (
-                <div key={index} className="flex justify-between p-2 rounded bg-muted/50">
-                  <span className="font-mono font-bold">{note.note}</span>
-                  <span className="text-muted-foreground">{note.string}</span>
-                </div>
-              ))}
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">A4</span>
+                <span className="text-muted-foreground">440.00 Hz</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">C4</span>
+                <span className="text-muted-foreground">261.63 Hz</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">E2</span>
+                <span className="text-muted-foreground">82.41 Hz</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">G3</span>
+                <span className="text-muted-foreground">196.00 Hz</span>
+              </div>
             </div>
           </CardContent>
         </Card>
