@@ -221,26 +221,50 @@ export const GuitarTuner = () => {
 
         <Card className="bg-card/30 backdrop-blur-sm border-border/30">
           <CardHeader>
-            <CardTitle className="text-lg">Common Reference Notes</CardTitle>
+            <CardTitle className="text-lg">Standard Guitar Tuning</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-2 text-sm">
               <div className="flex justify-between p-2 rounded bg-muted/50">
-                <span className="font-mono font-bold">A4</span>
-                <span className="text-muted-foreground">440.00 Hz</span>
-              </div>
-              <div className="flex justify-between p-2 rounded bg-muted/50">
-                <span className="font-mono font-bold">C4</span>
-                <span className="text-muted-foreground">261.63 Hz</span>
-              </div>
-              <div className="flex justify-between p-2 rounded bg-muted/50">
                 <span className="font-mono font-bold">E2</span>
-                <span className="text-muted-foreground">82.41 Hz</span>
+                <span className="text-muted-foreground">6th (Low E)</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">A2</span>
+                <span className="text-muted-foreground">5th</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">D3</span>
+                <span className="text-muted-foreground">4th</span>
               </div>
               <div className="flex justify-between p-2 rounded bg-muted/50">
                 <span className="font-mono font-bold">G3</span>
-                <span className="text-muted-foreground">196.00 Hz</span>
+                <span className="text-muted-foreground">3rd</span>
               </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">B3</span>
+                <span className="text-muted-foreground">2nd</span>
+              </div>
+              <div className="flex justify-between p-2 rounded bg-muted/50">
+                <span className="font-mono font-bold">E4</span>
+                <span className="text-muted-foreground">1st (High E)</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-card/30 backdrop-blur-sm border-border/30">
+          <CardHeader>
+            <CardTitle className="text-lg">Chromatic Notes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-1 text-xs">
+              {CHROMATIC_NOTES.map((note, index) => (
+                <div key={index} className="flex justify-between p-2 rounded bg-muted/50">
+                  <span className="font-mono font-bold">{note.note}</span>
+                  <span className="text-muted-foreground">{note.frequency.toFixed(1)}</span>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
