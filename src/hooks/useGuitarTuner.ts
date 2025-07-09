@@ -8,7 +8,7 @@ interface TunerState {
   isTooQuiet: boolean;
 }
 
-const VOLUME_THRESHOLD = 0.2;
+const VOLUME_THRESHOLD = 0.07;
 
 export const useGuitarTuner = () => {
   const [state, setState] = useState<TunerState>({
