@@ -1,8 +1,59 @@
-# Welcome to your Lovable project
+# Chromatic Tuner
 
-## Project info
+A professional-grade chromatic tuner web application that provides real-time pitch detection for any musical instrument.
+
+## ✨ Features
+
+### 🎵 Professional Pitch Detection
+- **Real-time frequency analysis** using advanced autocorrelation algorithms
+- **30-sample moving average** for stable and accurate readings
+- **Exponential smoothing** for smooth frequency display transitions
+- **Chromatic note support** covering C2 to B5 (5+ octaves)
+
+### 🎸 Multi-Instrument Support
+- **Universal chromatic tuner** works with any instrument
+- **Guitar tuning reference** with standard EADGBE tuning
+- **Piano reference notes** including A440 and Middle C
+- **Comprehensive chromatic scale** display
+
+### 🔧 Advanced Features
+- **Smart volume detection** with customizable thresholds
+- **Frequency memory** retains last detected note when signal is quiet
+- **Visual tuning indicator** shows flat/sharp with precision
+- **Cents deviation display** for fine-tuning accuracy
+- **"In Tune" detection** with ±5 cent tolerance
+
+### 🎨 Modern UI/UX
+- **Dark mode interface** optimized for performance environments
+- **Responsive design** works on all devices
+- **Smooth animations** and transitions
+- **Professional typography** with monospace frequency display
+- **Visual volume meter** with real-time feedback
+
+### 🔒 Privacy & Performance
+- **Local processing** - no data sent to servers
+- **Microphone access** with proper permission handling
+- **Optimized audio processing** for minimal latency
+- **Browser-based** - no installation required
+
+## 🚀 Quick Start
+
+1. **Allow microphone access** when prompted
+2. **Click "Start Tuning"** to begin
+3. **Play your instrument** and watch the real-time frequency display
+4. **Tune to the target note** using the visual indicator
+
+## 📊 Technical Specifications
+
+- **Frequency Range**: 65 Hz - 988 Hz (C2 to B5)
+- **Accuracy**: ±5 cents for "In Tune" detection
+- **Sample Rate**: Adaptive based on browser capabilities
+- **Response Time**: ~50ms with smoothing
+- **Volume Threshold**: 0.04 (adjustable)
 
 **URL**: https://lovable.dev/projects/56f835f2-47d5-454f-97fc-f8b8bfc4c036
+
+## Project Info
 
 ## How can I edit this code?
 
