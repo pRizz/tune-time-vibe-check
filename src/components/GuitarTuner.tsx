@@ -316,6 +316,12 @@ export const GuitarTuner = () => {
             </div>
           </CardContent>
         </Card>
+
+        <footer className="text-center py-6">
+          <p className="text-xs text-muted-foreground">
+            Free and open source software vibe coded by Peter Ryszkiewicz and lovable.dev
+          </p>
+        </footer>
       </div>
     </div>
   );
