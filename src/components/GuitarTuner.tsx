@@ -79,9 +79,10 @@ const getClosestNote = (frequency: number) => {
 };
 
 export const GuitarTuner = () => {
-  const { frequency, isListening, error, volumeLevel, isTooQuiet, startTuner, stopTuner } = useGuitarTuner();
+  const { frequency, lastValidFrequency, isListening, error, volumeLevel, isTooQuiet, startTuner, stopTuner } = useGuitarTuner();
   
-  const closestNote = frequency ? getClosestNote(frequency) : null;
+  const displayFrequency = frequency || lastValidFrequency;
+  const closestNote = displayFrequency ? getClosestNote(displayFrequency) : null;
   const isInTune = closestNote && Math.abs(closestNote.cents) <= 5;
   
   return (
@@ -143,18 +144,23 @@ export const GuitarTuner = () => {
                   </div>
                 </div>
 
-                {isTooQuiet ? (
+                {isTooQuiet && !displayFrequency ? (
                   <div className="text-center p-6 bg-muted/50 rounded-lg">
                     <p className="text-muted-foreground">
                       Play louder - signal too quiet
                     </p>
                   </div>
-                ) : frequency ? (
+                ) : displayFrequency ? (
                   <div className="text-center space-y-4">
                     <div className="space-y-2">
                       <div className="text-6xl font-mono font-bold text-primary">
-                        {frequency.toFixed(1)}
+                        {displayFrequency.toFixed(1)}
                         <span className="text-lg text-muted-foreground ml-1">Hz</span>
+                        {isTooQuiet && (
+                          <div className="text-xs text-muted-foreground mt-1">
+                            (Last detected)
+                          </div>
+                        )}
                       </div>
                       
                       {closestNote && (

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface TunerState {
   frequency: number | null;
+  lastValidFrequency: number | null;
   isListening: boolean;
   error: string | null;
   volumeLevel: number;
@@ -13,6 +14,7 @@ const VOLUME_THRESHOLD = 0.04;
 export const useGuitarTuner = () => {
   const [state, setState] = useState<TunerState>({
     frequency: null,
+    lastValidFrequency: null,
     isListening: false,
     error: null,
     volumeLevel: 0,
@@ -69,8 +71,8 @@ export const useGuitarTuner = () => {
     const buffer = frequencyBufferRef.current;
     buffer.push(newFreq);
     
-    // Keep only the last 10 readings
-    if (buffer.length > 10) {
+    // Keep only the last 30 readings
+    if (buffer.length > 30) {
       buffer.shift();
     }
     
@@ -108,7 +110,12 @@ export const useGuitarTuner = () => {
         const rawFreq = fundamentalHz(buf, ctx.sampleRate);
         const smoothedFreq = updateFrequencyBuffer(rawFreq);
         
-        setState(prev => ({ ...prev, frequency: smoothedFreq, isListening: true }));
+        setState(prev => ({ 
+          ...prev, 
+          frequency: smoothedFreq, 
+          lastValidFrequency: smoothedFreq || prev.lastValidFrequency,
+          isListening: true 
+        }));
         animationFrameRef.current = requestAnimationFrame(update);
       };
       
@@ -150,6 +157,7 @@ export const useGuitarTuner = () => {
       ...prev, 
       isListening: false, 
       frequency: null, 
+      lastValidFrequency: null,
       volumeLevel: 0,
       isTooQuiet: false 
     }));
