@@ -157,7 +157,7 @@ export const GuitarTuner = () => {
                     />
                   </div>
                   <span className="text-xs text-muted-foreground min-w-[3rem] text-right">
-                    {volumeLevel > 0 ? `${Math.round(20 * Math.log10(volumeLevel))} dB` : '-∞ dB'}
+                    {volumeLevel > 0 ? `${Math.round(20 * Math.log10(volumeLevel) + 94)} dB` : '0 dB'}
                   </span>
                 </div>
 
