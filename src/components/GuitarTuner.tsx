@@ -148,12 +148,18 @@ export const GuitarTuner = () => {
                   ) : (
                     <Volume2 className="h-4 w-4 text-primary" />
                   )}
-                  <div className="flex-1 bg-secondary rounded-full h-2">
+                  <div className="flex-1 bg-secondary rounded-full h-2 relative">
                     <div
                       className={`h-full rounded-full transition-all duration-200 ${
                         isTooQuiet ? 'bg-muted-foreground' : 'bg-primary'
                       }`}
                       style={{ width: `${Math.min(volumeLevel * 1000, 100)}%` }}
+                    />
+                    {/* Minimum volume threshold indicator */}
+                    <div 
+                      className="absolute top-0 w-0.5 h-full bg-border"
+                      style={{ left: '4%' }}
+                      title="Minimum volume needed"
                     />
                   </div>
                   <span className="text-xs text-muted-foreground min-w-[3rem] text-right">
