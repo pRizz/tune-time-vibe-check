@@ -156,6 +156,9 @@ export const GuitarTuner = () => {
                       style={{ width: `${Math.min(volumeLevel * 1000, 100)}%` }}
                     />
                   </div>
+                  <span className="text-xs text-muted-foreground min-w-[3rem] text-right">
+                    {volumeLevel > 0 ? `${Math.round(20 * Math.log10(volumeLevel))} dB` : '-∞ dB'}
+                  </span>
                 </div>
 
                 {isTooQuiet && !currentFreq ? (
